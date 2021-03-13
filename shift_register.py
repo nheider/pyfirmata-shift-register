@@ -8,10 +8,10 @@ latchPin = 8
 clockPin = 12
 dataPin = 11
 
-#LED Byte 
+#Initialize Byte 
 byte  = [0, 0, 0, 0, 0, 0, 0, 0] #if controlling leds: 0 = led off; 1 = led on. 
 
-#Write to shift register (depending on usage one might always flush the register with 0s bevore filling) 
+#Write to shift register (depending on usage one might always flush the register with 0s before filling) 
 def updateShiftRegister(byte): 
    board.digital[latchPin].write(0)
    for i in byte: 
@@ -20,8 +20,8 @@ def updateShiftRegister(byte):
        board.digital[clockPin].write(0)
    board.digital[latchPin].write(1)
 
-#usage example (e.g. light 8 leds in predefinded patterns): 
-while True: #gets written left to right, so last list element = first register output 
+#Usage example (e.g. light 8 leds in predefinded patterns): 
+while True: #gets written left to right, so last list element = first register output
     byte = [0, 0, 0, 0, 1, 1, 1, 1] 
     updateShiftRegister(byte)
     time.sleep(5) 
